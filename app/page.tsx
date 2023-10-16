@@ -6,9 +6,9 @@ export default function Home() {
   const [search, setSearch] = useState("");
   // console.log(search);
 
-  const handleSearch = (query: string) => {
-    setSearch(query);
-  };
+  // const handleSearch = (query: string) => {
+  //   setSearch(query);
+  // };
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <form>

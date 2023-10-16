@@ -20,15 +20,17 @@ interface Tracks {
 // }
 
 export default function Details({ params }: { params: { slug: string } }) {
-  const apiUrl = process.env.API_URL2 as string;
+  const apiUrl2 = process.env.API_URL2 as string;
   const [artistsDetails, setArtistsDetails] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // console.log(params)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(apiUrl2, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -65,10 +67,9 @@ export default function Details({ params }: { params: { slug: string } }) {
 
         const result = await response.json();
 
-        if (result.errors) {
-          throw new Error(result.errors[0].message);
-        }
-
+        // if (result.errors) {
+        //   throw new Error(result.errors[0].message);
+        // }
         setArtistsDetails(result.data.queryArtists);
       } catch (error) {
         setError("An error occurred while fetching data.");
@@ -76,7 +77,6 @@ export default function Details({ params }: { params: { slug: string } }) {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -109,7 +109,7 @@ export default function Details({ params }: { params: { slug: string } }) {
               </h1>
             </div>
             <ul role="list" className="divide-y divide-gray-100">
-              {artist.albums.map((album: Album) => (
+              {artist?.albums?.map((album: Album) => (
                 <li
                   key={album.id}
                   className="flex justify-between gap-x-4 sm:gap-x-6 py-3 sm:py-5 lg:py-6"
